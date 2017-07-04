@@ -18,7 +18,9 @@ export default function ExploreActionButtons({
   const exportToCSVClasses = cx('btn btn-default btn-sm', {
     'disabled disabledButton': !canDownload,
   });
-  if (slice) {
+
+if (slice) {
+alert("inside csv and json convert and slice data: ----------------->>>>", slice.data);
     return (
       <div className="btn-group results" role="group">
         <URLShortLinkButton slice={slice} />
@@ -43,6 +45,16 @@ export default function ExploreActionButtons({
           rel="noopener noreferrer"
         >
           <i className="fa fa-file-text-o" /> .csv
+        </a>
+
+        <a
+          href={slice.data.pdf_endpoint}
+          className={exportToPDFClasses}
+          title="Export to .pdf format"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fa fa-file-text-o" /> .pdf 
         </a>
 
         <DisplayQueryButton

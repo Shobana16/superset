@@ -12,6 +12,7 @@ describe('ExploreActionButtons', () => {
       data: {
         csv_endpoint: '',
         json_endpoint: '',
+        pdf_endpoint: '', 
       },
     },
     queryEndpoint: 'localhost',

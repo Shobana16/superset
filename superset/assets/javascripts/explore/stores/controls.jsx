@@ -63,8 +63,7 @@ export const controls = {
     valueKey: 'metric_name',
     optionRenderer: m => <MetricOption metric={m} />,
     valueRenderer: m => <MetricOption metric={m} />,
-    default: control =>
-      control.choices && control.choices.length > 0 ? [control.choices[0][0]] : null,
+    default: c => c.options && c.options.length > 0 ? [c.options[0].metric_name] : null,
     mapStateToProps: state => ({
       options: (state.datasource) ? state.datasource.metrics : [],
     }),
@@ -100,9 +99,8 @@ export const controls = {
     validators: [v.nonEmpty],
     optionRenderer: m => <MetricOption metric={m} />,
     valueRenderer: m => <MetricOption metric={m} />,
+    default: c => c.options && c.options.length > 0 ? c.options[0].metric_name : null,
     valueKey: 'metric_name',
-    default: control =>
-      control.choices && control.choices.length > 0 ? control.choices[0][0] : null,
     mapStateToProps: state => ({
       options: (state.datasource) ? state.datasource.metrics : [],
     }),
@@ -336,11 +334,14 @@ export const controls = {
     type: 'SelectControl',
     multi: true,
     label: 'Columns',
-    mapStateToProps: state => ({
-      choices: (state.datasource) ? state.datasource.gb_cols : [],
-    }),
     default: [],
     description: 'One or many controls to pivot as columns',
+    optionRenderer: c => <ColumnOption column={c} />,
+    valueRenderer: c => <ColumnOption column={c} />,
+    valueKey: 'column_name',
+    mapStateToProps: state => ({
+      options: (state.datasource) ? state.datasource.columns : [],
+    }),
   },
 
   all_columns: {
@@ -657,6 +658,7 @@ export const controls = {
     type: 'SelectControl',
     label: 'Entity',
     default: null,
+    validators: [v.nonEmpty],
     description: 'This define the element to be plotted on the chart',
     mapStateToProps: state => ({
       choices: (state.datasource) ? state.datasource.gb_cols : [],
@@ -763,7 +765,9 @@ export const controls = {
     type: 'SelectControl',
     freeForm: true,
     label: 'Table Timestamp Format',
-    default: 'smart_date',
+    default: '%Y-%m-%d %H:%M:%S',
+    validators: [v.nonEmpty],
+    clearable: false,
     choices: D3_TIME_FORMAT_OPTIONS,
     description: 'Timestamp Format',
   },
@@ -870,7 +874,7 @@ export const controls = {
     label: 'Code',
     description: 'Put your code here',
     mapStateToProps: state => ({
-      language: state.controls ? state.controls.markup_type.value : null,
+      language: state.controls && state.controls.markup_type ? state.controls.markup_type.value : 'markdown',
     }),
     default: '',
   },

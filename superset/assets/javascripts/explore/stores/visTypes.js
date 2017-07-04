@@ -1,5 +1,7 @@
 import { D3_TIME_FORMAT_OPTIONS } from './controls';
 
+import * as v from '../validators';
+
 export const sections = {
   druidTimeSeries: {
     label: 'Time',
@@ -148,6 +150,7 @@ const visTypes = {
     controlOverrides: {
       x_axis_format: {
         choices: D3_TIME_FORMAT_OPTIONS,
+        default: 'smart_date',
       },
     },
   },
@@ -183,6 +186,10 @@ const visTypes = {
       y_axis_format: {
         label: 'Left Axis Format',
       },
+      x_axis_format: {
+        choices: D3_TIME_FORMAT_OPTIONS,
+        default: 'smart_date',
+      },
     },
   },
 
@@ -211,6 +218,12 @@ const visTypes = {
       },
       sections.NVD3TimeSeries[1],
     ],
+    controlOverrides: {
+      x_axis_format: {
+        choices: D3_TIME_FORMAT_OPTIONS,
+        default: 'smart_date',
+      },
+    },
   },
 
   compare: {
@@ -226,6 +239,12 @@ const visTypes = {
       },
       sections.NVD3TimeSeries[1],
     ],
+    controlOverrides: {
+      x_axis_format: {
+        choices: D3_TIME_FORMAT_OPTIONS,
+        default: 'smart_date',
+      },
+    },
   },
 
   area: {
@@ -252,6 +271,12 @@ const visTypes = {
       },
       sections.NVD3TimeSeries[1],
     ],
+    controlOverrides: {
+      x_axis_format: {
+        default: 'smart_date',
+        choices: D3_TIME_FORMAT_OPTIONS,
+      },
+    },
   },
 
   table: {
@@ -475,9 +500,8 @@ const visTypes = {
         label: null,
         controlSetRows: [
           ['metric'],
-          ['compare_lag'],
-          ['compare_suffix'],
-          ['y_axis_format'],
+          ['compare_lag', 'compare_suffix'],
+          ['y_axis_format', null],
         ],
       },
     ],
@@ -610,6 +634,37 @@ const visTypes = {
       groupby: {
         label: 'Source / Target',
         description: 'Choose a source and a target',
+      },
+    },
+  },
+  chord: {
+    label: 'Chord Diagram',
+    controlPanelSections: [
+      {
+        label: null,
+        controlSetRows: [
+          ['groupby', 'columns'],
+          ['metric'],
+          ['row_limit', 'y_axis_format'],
+        ],
+      },
+    ],
+    controlOverrides: {
+      y_axis_format: {
+        label: 'Number format',
+        description: 'Choose a number format',
+      },
+      groupby: {
+        label: 'Source',
+        multi: false,
+        validators: [v.nonEmpty],
+        description: 'Choose a source',
+      },
+      columns: {
+        label: 'Target',
+        multi: false,
+        validators: [v.nonEmpty],
+        description: 'Choose a target',
       },
     },
   },

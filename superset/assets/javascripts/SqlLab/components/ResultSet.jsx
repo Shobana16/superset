@@ -10,6 +10,7 @@ import FilterableTable from '../../components/FilterableTable/FilterableTable';
 const propTypes = {
   actions: PropTypes.object,
   csv: PropTypes.bool,
+  pdf: PropTypes.bool,
   query: PropTypes.object,
   search: PropTypes.bool,
   showSql: PropTypes.bool,
@@ -21,7 +22,8 @@ const defaultProps = {
   search: true,
   visualize: true,
   showSql: false,
-  csv: true,
+  csv: true, 
+  pdf: true,
   actions: {},
   cache: false,
 };
@@ -58,12 +60,20 @@ export default class ResultSet extends React.PureComponent {
     }
   }
   getControls() {
-    if (this.props.search || this.props.visualize || this.props.csv) {
+    if (this.props.search || this.props.visualize || this.props.csv || this.props.pdf ) {
       let csvButton;
+      let pdfButton;
       if (this.props.csv) {
         csvButton = (
           <Button bsSize="small" href={'/superset/csv/' + this.props.query.id}>
             <i className="fa fa-file-text-o" /> .CSV
+          </Button>
+        );
+      }
+      if (this.props.pdf) {
+        pdfButton = (
+          <Button bsSize="small" href={'/superset/pdf/' + this.props.query.id}>
+            <i className="fa fa-file-text-o" /> .pdf 
           </Button>
         );
       }
@@ -96,6 +106,7 @@ export default class ResultSet extends React.PureComponent {
               <ButtonGroup>
                 {visualizeButton}
                 {csvButton}
+                {pdfButton}
               </ButtonGroup>
             </div>
             <div className="pull-right">

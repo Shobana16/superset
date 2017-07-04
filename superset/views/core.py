@@ -943,6 +943,13 @@ class Superset(BaseSupersetView):
                 status=200,
                 headers=generate_download_headers("csv"),
                 mimetype="application/csv")
+        
+        if request.args.get("pdf") == "true":
+            return Response(
+                viz_obj.get_csv(),
+                status=200,
+                headers=generate_download_headers("csv"),
+                mimetype="application/csv")
 
         if request.args.get("query") == "true":
             try:

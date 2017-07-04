@@ -167,8 +167,8 @@ export function chartRenderingFailed(error) {
 }
 
 export const UPDATE_EXPLORE_ENDPOINTS = 'UPDATE_EXPLORE_ENDPOINTS';
-export function updateExploreEndpoints(jsonUrl, csvUrl, standaloneUrl) {
-  return { type: UPDATE_EXPLORE_ENDPOINTS, jsonUrl, csvUrl, standaloneUrl };
+export function updateExploreEndpoints(jsonUrl, csvUrl, pdfUrl, standaloneUrl) {
+  return { type: UPDATE_EXPLORE_ENDPOINTS, jsonUrl, csvUrl, pdfUrl, standaloneUrl };
 }
 
 export const REMOVE_CONTROL_PANEL_ALERT = 'REMOVE_CONTROL_PANEL_ALERT';

@@ -1,6 +1,7 @@
 export const slice = {
   token: 'token_089ec8c1',
   csv_endpoint: '',
+  pdf_endpoint: '',
   edit_url: '/slicemodelview/edit/39',
   viz_name: 'filter_box',
   json_endpoint: '',

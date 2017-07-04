@@ -134,6 +134,7 @@ class ChartContainer extends React.PureComponent {
 
       data: {
         csv_endpoint: getExploreUrl(props.formData, 'csv'),
+        pdf_endpoint: getExploreUrl(props.formData, 'pdf'),
         json_endpoint: getExploreUrl(props.formData, 'json'),
         standalone_endpoint: getExploreUrl(props.formData, 'standalone'),
       },

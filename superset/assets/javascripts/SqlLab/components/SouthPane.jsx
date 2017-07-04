@@ -89,6 +89,7 @@ class SouthPane extends React.PureComponent {
           query={query}
           visualize={false}
           csv={false}
+          pdf={false}
           actions={props.actions}
           cache
           height={this.state.innerTabHeight}

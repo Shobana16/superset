@@ -42,6 +42,13 @@ describe('utils', () => {
           .search({ form_data: sFormData, csv: 'true' }),
     );
   });
+  it('getExploreUrl generates proper pdf URL', () => {
+    compareURI(
+        URI(getExploreUrl(formData, 'pdf', false, 'superset.com')),
+        URI('/superset/explore_json/table/1/')
+          .search({ form_data: sFormData, pdf: 'true' }),
+    );
+  });
   it('getExploreUrl generates proper standalone URL', () => {
     compareURI(
         URI(getExploreUrl(formData, 'standalone', false, 'superset.com')),
